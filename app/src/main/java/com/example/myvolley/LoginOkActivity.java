@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginOkActivity extends AppCompatActivity {
-private EditText textViewPseudo, textViewEmail, textViewEdit;
+private TextView textViewPseudo, textViewEmail, textViewEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

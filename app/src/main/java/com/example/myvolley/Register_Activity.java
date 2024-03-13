@@ -64,6 +64,7 @@ public class Register_Activity extends AppCompatActivity {
 
                 @Override
                 public void systemError(String message) {
+
                     Toast.makeText(Register_Activity.this, message, Toast.LENGTH_SHORT).show();
                 }
             });
