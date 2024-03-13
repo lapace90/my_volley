@@ -30,13 +30,13 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        queue = MySingleton.getInstance(this).getRequestQueue();
+        request = new MyRequest(this, queue);
+
         login = findViewById(R.id.login);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginBtn);
         registerBtn = findViewById(R.id.registerBtn);
-
-        queue = MySingleton.getInstance(this).getRequestQueue();
-        request = new MyRequest(this, queue);
 
         sessionManager = new SessionManager(this);
         if(sessionManager.isLogged()) {
@@ -54,22 +54,20 @@ public class Login_Activity extends AppCompatActivity {
                 startActivity(i);
                 finish();
 
-                request.login(LOGIN, PASSWORD, new MyRequest.RetoursPHP() {
+                request.login(LOGIN, PASSWORD, new MyRequest.LoginCallBack() {
                     @Override
-                    public void toutOk(String message) {
-                        Toast.makeText(Login_Activity.this, message, Toast.LENGTH_SHORT).show();
+                    public void onSuccess(String message) {
+                        Toast.makeText(Login_Activity.this, " "+ message, Toast.LENGTH_SHORT).show();
                     }
 
-
-
                     @Override
-                    public void pasOk(String message) {
-                        Toast.makeText(Login_Activity.this, message, Toast.LENGTH_SHORT).show();
+                    public void onError(String message) {
+                        Toast.makeText(Login_Activity.this," " + message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void systemError(String message) {
-                        Toast.makeText(Login_Activity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_Activity.this, " " + message, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
